@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Closer</title>
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <h1>Closer</h1>
+        <div id="app">
+            <ul>
+                <li v-for="origin in origins">
+                    {{origin}}
+                </li>
+            </ul>
+            <input v-model="inputOrigin" placeholder="Origin"></input>
+            <button @click="addNewOrigin">Add</button>
+            <input v-model="destination" placeholder="Destination">
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                origins: [],
+                inputOrigin: "",
+                destination: ""
+            },
+            methods:{
+                addNewOrigin: function(){
+                    if(!this.inputOrigin) return;
+                    this.origins.push(this.inputOrigin);
+                    this.inputOrigin = "";
+                }
+            }
+        });
+    </script>
+</html> 
