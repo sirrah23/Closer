@@ -5,12 +5,22 @@
         <script src="https://unpkg.com/vue"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
+    <style>
+        .red {
+           color: red 
+        }
+        .green{
+           color: green 
+        }
+    </style>
     <body>
         <h1>Closer</h1>
         <div id="app">
             <ul>
                 <li v-for="origin in origins">
-                    {{origin}}
+                    <div v-bind:class="{red: origin.color==='red', green: origin.color==='green'}">
+                        {{origin.name}}<span v-if="origin.computed">: {{origin.distance_text}}</span>
+                    </div>
                 </li>
             </ul>
             <input v-model="inputOrigin" placeholder="Origin"></input>
@@ -30,7 +40,13 @@
             methods:{
                 addNewOrigin: function(){
                     if(!this.inputOrigin) return;
-                    this.origins.push(this.inputOrigin);
+                    this.origins.push({
+                        name: this.inputOrigin,
+                        color: "",
+                        distance_value: null,
+                        distance_text: null,
+                        computed: false
+                    });
                     this.inputOrigin = "";
                 },
                 computeDistances: function(){
@@ -39,15 +55,27 @@
                     }
                     const link = this.getMapsLink()
                     axios.get(link)
-                        .then((response) => { console.log(response);});
+                        .then((response) => {
+                            const data = response.data;
+                            data.result.forEach((comp, i) => {
+                                if(comp.status === "OK"){
+                                    this.origins[i].color = 'green';
+                                    this.origins[i].distance_text = comp.distance.text;
+                                    this.origins[i].distance_value = comp.distance.value;
+                                } else{
+                                    this.origins[i].color = 'red';
+                                }
+                                this.origins[i].computed = true;
+                            })
+                        });
                 },
                 getMapsLink: function(){
                     const base_link = '/compute-distance';
-                    const origins = this.origins.join('|');
+                    const origins = this.origins.map((o) => o.name).join('|');
                     const destination = this.destination;
                     return `${base_link}?origins=${origins}&destination=${destination}`;
                 }
-            }
+            },
         });
     </script>
 </html> 

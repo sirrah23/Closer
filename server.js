@@ -9,12 +9,14 @@ app.get('/', function(req, res){
 });
 
 app.get('/compute-distance', function(req, res){
+  console.log(req.query);
   let respJSON = {error: "Something went wrong, try again later"};
   if (!req.query.origins || !req.query.destination){
     res.json({error: "Get request is missing a parameter"}) 
   }
   const mapsAPIRequestLink = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${req.query.origins}&destinations=${req.query.destination}&key=${process.env.API_KEY}`
   request(mapsAPIRequestLink, function (error, response, body) {
+    console.log(body);
     if(error !== null){
       console.log(`Http Request Error: ${error}}`)
       res.json(respJSON);
