@@ -1,3 +1,18 @@
+Vue.component('box-component', {
+  template:`
+    <div class="box">
+      <div class="columns">
+        <div class="column is-four-fifths">
+          <p><slot name="name"></slot></p>
+        </div>
+        <div class="column">
+          <p><slot name="distance">-</slot></p>
+        </div>
+      </div>
+    </div>
+  `,
+});
+
 const app = new Vue({
   el: "#app",
   data: {
@@ -20,6 +35,7 @@ const app = new Vue({
       computeDistances: function(){
           if(this.origins.length===0 || this.destination.length === 0){
               alert("Must have atleast one origin and non-empty destination")
+              return;
           }
           const link = this.getMapsLink()
           axios.get(link)

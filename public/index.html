@@ -13,21 +13,46 @@
         .green{
            color: green 
         }
+        .user-content{
+            width: 600px;
+            margin: auto;
+        }
     </style>
     <body>
-        <h1>Closer</h1>
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                <h1 class="title">
+                    Closer
+                </h1>
+                    For all of your distance computing needs
+                </h2>
+                </div>
+            </div>
+        </section>
         <div id="app">
-            <ul>
-                <li v-for="origin in origins">
-                    <div v-bind:class="{red: origin.color==='red', green: origin.color==='green'}">
-                        {{origin.name}}<span v-if="origin.computed">: {{origin.distance_text}}</span>
+            <div class="user-content">
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <input class="input" v-model="inputOrigin" placeholder="Origin"></input>
                     </div>
-                </li>
-            </ul>
-            <input v-model="inputOrigin" placeholder="Origin"></input>
-            <button @click="addNewOrigin">Add</button>
-            <input v-model="destination" placeholder="Destination">
-            <button @click="computeDistances">Compute</button>
+                    <div class="column">
+                        <button class="button" @click="addNewOrigin">Add</button>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <input class="input" v-model="destination" placeholder="Destination">
+                    </div>
+                    <div class="column">
+                        <button class="button is-primary" @click="computeDistances">Compute</button>
+                    </div>
+                </div>
+                <box-component v-for="origin in origins">
+                    <span slot="name">{{origin.name}}</span>
+                    <span v-if="origin.computed" slot="distance">{{origin.distance_text}}</span>
+                </box-component>
+            </div>
         </div>
         <script src="/main.js"></script>
     </body>
