@@ -4,8 +4,10 @@ const app = express();
 const request = require('request');
 require('dotenv').config();
 
+app.use(express.static('public'));
+
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/compute-distance', function(req, res){
