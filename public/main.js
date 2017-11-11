@@ -41,6 +41,10 @@ const app = new Vue({
           axios.get(link)
               .then((response) => {
                   const data = response.data;
+                  if(data.error !== null){
+                    alert('Something went wrong...try again later');
+                    return;
+                  }
                   data.result.forEach((comp, i) => {
                       if(comp.status === "OK"){
                           this.origins[i].color = 'green';
