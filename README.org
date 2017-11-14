@@ -1,0 +1,9 @@
+* Closer
+
+The question, "Which location is closer to X?", haunts many people
+at night - this application will finally assuage them.
+
+Using the /Google Distance Matrix API/ we can compute distances 
+between multiple origin locations and a final, destination location.
+
+[[file:images/screenshot.png][screenshot]]
