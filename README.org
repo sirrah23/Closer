@@ -22,5 +22,5 @@ between multiple origin locations and a final, destination location.
    8. Navigate to =localhost:3000= on your browser
    
 ** Screenshot
-[[file:images/screenshot.png][]]
+[[file:images/screenshot.png][screenshot]]
 
