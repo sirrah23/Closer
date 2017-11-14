@@ -38,6 +38,7 @@ app.get('/compute-distance', function(req, res){
       console.log(`Sending ${pretty(responseJSON)} now`);
       res.json(responseJSON);
       console.log('Sent');
+      return null;
     })
     .catch(err => {
       console.log(`Error: ${err}`);
