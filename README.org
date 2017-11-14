@@ -20,6 +20,7 @@ between multiple origin locations and a final, destination location.
    6. Run ~npm install~
    7. Run ~npm start~
    8. Navigate to =localhost:3000= on your browser
-
-[[file:images/screenshot.png][screenshot]]
+   
+** Screenshot
+[[file:images/screenshot.png][]]
 
