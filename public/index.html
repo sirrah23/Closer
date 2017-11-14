@@ -51,8 +51,8 @@
                     </div>
                 </div>
                 <box-component v-for="origin in orderedOrigins">
-                    <span slot="name">{{origin.name}}</span>
-                    <span slot="distance">{{origin.distance_text}}</span>
+                    <span slot="name" :class="origin.color">{{origin.name}}</span>
+                    <span slot="distance" :class="origin.color">{{origin.distance_text}}</span>
                 </box-component>
             </div>
         </div>
