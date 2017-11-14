@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const pretty = require('./str_utils.js').prettyPrintObj;
-const DistanceCalculator = require('./maps.js');
+const pretty = require('./server/str_utils.js').prettyPrintObj;
+const DistanceCalculator = require('./server/maps.js');
 require('dotenv').config();
 
 const dc = new DistanceCalculator(process.env.API_KEY);
