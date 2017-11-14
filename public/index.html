@@ -5,13 +5,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
         <script src="https://unpkg.com/vue"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
     </head>
     <style>
         .red {
-           color: red 
+           color: red
         }
         .green{
-           color: green 
+           color: green
         }
         .user-content{
             width: 600px;
@@ -49,12 +50,12 @@
                         <button class="button is-primary" @click="computeDistances">Compute</button>
                     </div>
                 </div>
-                <box-component v-for="origin in origins">
+                <box-component v-for="origin in orderedOrigins">
                     <span slot="name">{{origin.name}}</span>
-                    <span v-if="origin.computed" slot="distance">{{origin.distance_text}}</span>
+                    <span slot="distance">{{origin.distance_text}}</span>
                 </box-component>
             </div>
         </div>
         <script src="/main.js"></script>
     </body>
-</html> 
+</html>

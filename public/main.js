@@ -6,7 +6,7 @@ Vue.component('box-component', {
           <p><slot name="name"></slot></p>
         </div>
         <div class="column">
-          <p><slot name="distance">-</slot></p>
+          <p><slot name="distance"></slot></p>
         </div>
       </div>
     </div>
@@ -17,6 +17,7 @@ const app = new Vue({
   el: "#app",
   data: {
       origins: [],
+      computed: false,
       inputOrigin: "",
       destination: ""
   },
@@ -28,16 +29,16 @@ const app = new Vue({
               color: "",
               distance_value: null,
               distance_text: null,
-              computed: false
           });
           this.inputOrigin = "";
       },
       computeDistances: function(){
           if(this.origins.length===0 || this.destination.length === 0){
-              alert("Must have atleast one origin and non-empty destination")
+              alert("Must have atleast one origin and non-empty destination");
               return;
           }
-          const link = this.getMapsLink()
+          this.computed = false;
+          const link = this.getMapsLink();
           axios.get(link)
               .then((response) => {
                   const data = response.data;
@@ -45,6 +46,7 @@ const app = new Vue({
                     alert('Something went wrong...try again later');
                     return;
                   }
+                  this.computed = true;
                   data.result.forEach((comp, i) => {
                       if(comp.status === "OK"){
                           this.origins[i].color = 'green';
@@ -53,8 +55,7 @@ const app = new Vue({
                       } else{
                           this.origins[i].color = 'red';
                       }
-                      this.origins[i].computed = true;
-                  })
+                  });
               });
       },
       getMapsLink: function(){
@@ -63,5 +64,14 @@ const app = new Vue({
           const destination = this.destination;
           return `${base_link}?origins=${origins}&destination=${destination}`;
       }
+  },
+  computed:{
+    orderedOrigins(){
+      if(this.computed){
+        return _.orderBy(this.origins, 'distance_value', 'asc');
+      } else{
+        return this.origins;
+      }
+    }
   },
 });
