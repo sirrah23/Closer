@@ -6,4 +6,20 @@ at night - this application will finally assuage them.
 Using the /Google Distance Matrix API/ we can compute distances 
 between multiple origin locations and a final, destination location.
 
+** How to run the app locally
+*** Requirements
+    Make sure you have the following installed:
+    - NodeJS
+    - NPM
+*** Steps
+   1. Obtain an API key for the /Google Distance Matrix API/
+   2. Enable the /Google Distance Matrix API/ on the Google developer console
+   3. Run ~git clone https://github.com/sirrah23/Closer.git~
+   4. Go into the cloned directory and create a file named =.env=
+   5. Add the following line to .env : ~API_KEY=<your-api-key>~
+   6. Run ~npm install~
+   7. Run ~npm start~
+   8. Navigate to =localhost:3000= on your browser
+
 [[file:images/screenshot.png][screenshot]]
+
