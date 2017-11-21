@@ -1,4 +1,5 @@
 Vue.component('box-component', {
+  props:['name'],
   template:`
     <div class="box">
       <div class="columns">
@@ -8,9 +9,17 @@ Vue.component('box-component', {
         <div class="column">
           <p><slot name="distance"></slot></p>
         </div>
+        <div class="column">
+          <a class="delete" @click='deleted'></a>
+        </div>
       </div>
     </div>
   `,
+  methods: {
+    deleted: function(){
+      this.$emit('deleted', this.name);
+    }
+  },
 });
 
 const app = new Vue({
@@ -63,7 +72,17 @@ const app = new Vue({
           const origins = this.origins.map((o) => o.name).join('|');
           const destination = this.destination;
           return `${base_link}?origins=${origins}&destination=${destination}`;
+      },
+      deleteOrigin: function(name){
+        const names = this.origins.map(o => o.name);
+        const index = names.indexOf(name);
+        if(index === -1){
+          return;
+        } 
+        this.origins.splice(index, 1);
+
       }
+
   },
   computed:{
     orderedOrigins(){

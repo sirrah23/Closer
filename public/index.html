@@ -50,7 +50,11 @@
                         <button class="button is-primary" @click="computeDistances">Compute</button>
                     </div>
                 </div>
-                <box-component v-for="origin in orderedOrigins">
+                <box-component 
+                    v-for="origin in orderedOrigins"
+                    v-on:deleted="deleteOrigin"
+                    :name="origin.name"
+                >
                     <span slot="name" :class="origin.color">{{origin.name}}</span>
                     <span slot="distance" :class="origin.color">{{origin.distance_text}}</span>
                 </box-component>
