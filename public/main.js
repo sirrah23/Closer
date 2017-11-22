@@ -19,7 +19,7 @@ Vue.component('box-component', {
     deleted: function(){
       this.$emit('deleted', this.name);
     }
-  },
+  }
 });
 
 const app = new Vue({
@@ -33,11 +33,15 @@ const app = new Vue({
   methods:{
       addNewOrigin: function(){
           if(!this.inputOrigin) return;
+          if(this.origins.map(o => o.name).indexOf(this.inputOrigin) !== -1){
+            alert('Duplicate origin');
+            return;
+          }
           this.origins.push({
               name: this.inputOrigin,
               color: "",
               distance_value: null,
-              distance_text: null,
+              distance_text: null
           });
           this.inputOrigin = "";
       },
@@ -78,7 +82,7 @@ const app = new Vue({
         const index = names.indexOf(name);
         if(index === -1){
           return;
-        } 
+        }
         this.origins.splice(index, 1);
 
       }
